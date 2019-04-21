@@ -1,14 +1,19 @@
 package com.usst.transformer.mr.nu;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.mapreduce.TableMapReduceUtil;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 import com.usst.commom.GlobalConstants;
+import com.usst.transformer.model.dim.StatsUserDimension;
+import com.usst.transformer.model.value.map.TimeOutputValue;
 import com.usst.util.TimeUtil;
 
 
@@ -47,14 +52,11 @@ public class NewInstallUserRunner implements Tool {
 		
 		TableMapReduceUtil.initTableMapperJob(
 				                       initScan(), 
-				                       mapper,
-				                       outputKeyClass, 
-				                       outputValueClass,
+				                       NewInstallUserMapper.class,
+				                       StatsUserDimension.class, 
+				                       TimeOutputValue.class,
 				                       job
 				                       false);
-		
-		job.setMapOutputKeyClass(theClass);
-		job.setMapOutputValueClass(theClass);
 		
 		job.setReducerClass(cls);
 		job.setOutputKeyClass(theClass);
@@ -71,6 +73,11 @@ public class NewInstallUserRunner implements Tool {
 	}
 	
 	
+	private List<Scan> initScan() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public static void main(String [] args) {
 		int result = 0 ;
 		try {
