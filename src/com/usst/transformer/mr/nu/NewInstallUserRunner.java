@@ -14,6 +14,7 @@ import org.apache.hadoop.util.ToolRunner;
 import com.usst.commom.GlobalConstants;
 import com.usst.transformer.model.dim.StatsUserDimension;
 import com.usst.transformer.model.value.map.TimeOutputValue;
+import com.usst.transformer.mr.TransformerOutputFormat;
 import com.usst.util.TimeUtil;
 
 
@@ -55,13 +56,12 @@ public class NewInstallUserRunner implements Tool {
 				                       NewInstallUserMapper.class,
 				                       StatsUserDimension.class, 
 				                       TimeOutputValue.class,
-				                       job
-				                       false);
+				                       job);
 		
-		job.setReducerClass(cls);
-		job.setOutputKeyClass(theClass);
-		job.setOutputValueClass(theClass);
-		job.setOutputFormatClass(cls);
+		job.setReducerClass(NewInstallUserReducer.class);
+		job.setOutputKeyClass(StatsUserDimension.class);
+		job.setOutputValueClass(TimeOutputValue.class);
+		job.setOutputFormatClass(TransformerOutputFormat.class);
 		
 		
 		

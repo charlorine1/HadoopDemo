@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import org.apache.hadoop.conf.Configuration;
 
 import com.usst.transformer.model.dim.base.BaseDimension;
+import com.usst.transformer.model.value.BaseStatsValueWritable;
+import com.usst.transformer.service.IDimensionConverter;
 
 /**
  * 自定义的配合自定义output进行具体sql输出的类
@@ -27,5 +29,5 @@ public interface IOutputCollector {
      * @throws SQLException
      * @throws IOException
      */
-   // public void collect(Configuration conf, BaseDimension key, BaseStatsValueWritable value, PreparedStatement pstmt, IDimensionConverter converter) throws SQLException, IOException;
+    public void collect(Configuration conf, BaseDimension key, BaseStatsValueWritable value, PreparedStatement pstmt, IDimensionConverter converter) throws SQLException, IOException;
 }

@@ -8,23 +8,41 @@ import com.usst.commom.KpiType;
 import com.usst.transformer.model.value.BaseStatsValueWritable;
 
 public class TimeOutputValue extends BaseStatsValueWritable{
+    private String id; // id
+    private long time; // 时间戳
 
-	@Override
-	public void readFields(DataInput arg0) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
+    public String getId() {
+        return id;
+    }
 
-	@Override
-	public void write(DataOutput arg0) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	@Override
-	public KpiType getKpi() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    @Override
+    public void write(DataOutput out) throws IOException {
+        out.writeUTF(this.id);
+        out.writeLong(this.time);
+    }
+
+    @Override
+    public void readFields(DataInput in) throws IOException {
+        this.id = in.readUTF();
+        this.time = in.readLong();
+    }
+
+    @Override
+    public KpiType getKpi() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }
