@@ -32,14 +32,15 @@ public class NewInstallUserMapper extends TableMapper<StatsUserDimension, TimeOu
 
     /**
      * map 读取hbase中的数据，输入数据为：hbase表中每一行。
-     * 输出key类型：StatsUserDimension
+              * 输出key类型：StatsUserDimension
      * value类型：TimeOutputValue
      */
 	@Override
-	protected void map(ImmutableBytesWritable key, Result value,
-			Mapper<ImmutableBytesWritable, Result, StatsUserDimension, TimeOutputValue>.Context context)
+	protected void map(ImmutableBytesWritable key, 
+			Result value,
+			Mapper<ImmutableBytesWritable, Result, StatsUserDimension,TimeOutputValue>.Context context)
 			throws IOException, InterruptedException {
-		 String uuid = Bytes.toString(value.getValue(family, Bytes.toBytes(EventLogConstants.LOG_COLUMN_NAME_UUID)));
+		    String uuid = Bytes.toString(value.getValue(family, Bytes.toBytes(EventLogConstants.LOG_COLUMN_NAME_UUID)));
 	        String serverTime = Bytes.toString(value.getValue(family, Bytes.toBytes(EventLogConstants.LOG_COLUMN_NAME_SERVER_TIME)));
 	        String platform = Bytes.toString(value.getValue(family, Bytes.toBytes(EventLogConstants.LOG_COLUMN_NAME_PLATFORM)));
 	        
@@ -54,8 +55,8 @@ public class NewInstallUserMapper extends TableMapper<StatsUserDimension, TimeOu
 	        timeOutputValue.setId(uuid); // 设置id为uuid
 	        timeOutputValue.setTime(longOfTime); // 设置时间为服务器时间
 	        
+	        //创建维度，下面遍历map写出
 	        DateDimension dateDimension = DateDimension.buildDate(longOfTime, DateEnum.DAY);
-	        
 	        List<PlatformDimension> platformDimensions = PlatformDimension.buildList(platform);
 
 	        // 设置date维度
@@ -67,8 +68,8 @@ public class NewInstallUserMapper extends TableMapper<StatsUserDimension, TimeOu
 	        String browserVersion = Bytes.toString(value.getValue(family, Bytes.toBytes(EventLogConstants.LOG_COLUMN_NAME_BROWSER_VERSION)));
 	        List<BrowserDimension> browserDimensions = BrowserDimension.buildList(browserName, browserVersion);
 	       
-	        BrowserDimension defaultBrowser = new BrowserDimension("", "");//空浏览器维度，不考虑浏览器维度
-	       
+	        BrowserDimension defaultBrowser = new BrowserDimension("", "");//空浏览器维度，不考虑浏览器维度，新用户功能
+	        //数据获取的平台，目前只考虑使用website获取的数据
 	        for (PlatformDimension pf : platformDimensions) {
 	            // 1. 设置为一个默认值
 	            statsUserDimension.setBrowser(defaultBrowser);
