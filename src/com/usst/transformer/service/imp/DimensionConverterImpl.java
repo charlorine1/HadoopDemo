@@ -100,7 +100,7 @@ public class DimensionConverterImpl implements IDimensionConverter{
      * 创建cache key
      * 
      * @param dimension
-     * @return
+     * @return  date_dimension2019131114
      */
     private String buildCacheKey(BaseDimension dimension) {
         StringBuilder sb = new StringBuilder();

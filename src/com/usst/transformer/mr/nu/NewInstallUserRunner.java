@@ -248,9 +248,21 @@ public class NewInstallUserRunner implements Tool {
 				Bytes.toBytes(EventLogConstants.LOG_COLUMN_NAME_EVENT_NAME), CompareOp.EQUAL,
 				Bytes.toBytes(EventEnum.LAUNCH.alias)));
 
-		String[] colmuns = new String[] { EventLogConstants.LOG_COLUMN_NAME_EVENT_NAME,
-				EventLogConstants.LOG_COLUMN_NAME_UUID, EventLogConstants.LOG_COLUMN_NAME_SERVER_TIME,
-				EventLogConstants.LOG_COLUMN_NAME_PLATFORM, EventLogConstants.LOG_COLUMN_NAME_BROWSER_NAME,
+		/**
+		 * en = e_pv
+		 * u_uid = 
+		 * s_time =        //服务器时间 
+		 * pl = website
+		 * browser = chome
+		 * browser = 72.0.3626.119
+		 * 
+		 * */
+		String[] colmuns = new String[] { 
+				EventLogConstants.LOG_COLUMN_NAME_EVENT_NAME,    
+				EventLogConstants.LOG_COLUMN_NAME_UUID, 
+				EventLogConstants.LOG_COLUMN_NAME_SERVER_TIME,
+				EventLogConstants.LOG_COLUMN_NAME_PLATFORM, 
+				EventLogConstants.LOG_COLUMN_NAME_BROWSER_NAME,
 				EventLogConstants.LOG_COLUMN_NAME_BROWSER_VERSION };
 		fList.addFilter(this.getMultipleClumnPrefixFilter(colmuns));
 
