@@ -137,11 +137,11 @@ public class TransformerOutputFormat extends OutputFormat<BaseDimension, BaseSta
 				collector.collect(conf, key, value, pstmt, converter);
 				if (count % Integer.valueOf(
 						conf.get(GlobalConstants.JDBC_BATCH_NUMBER, GlobalConstants.DEFAULT_JDBC_BATCH_NUMBER)) == 0) {
+					//将一批命令提交给数据库来执行，如果全部命令执行成功，则返回更新计数组成的数组。
 					pstmt.executeBatch();
 					conn.commit();
 					batch.put(kpi, 0); // 对应批量计算删除
 				}
-
 			} catch (Throwable e) {
 				logger.error("在writer中写数据出现异常", e);
 				throw new IOException(e);

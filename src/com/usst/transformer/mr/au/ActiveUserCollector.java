@@ -17,7 +17,7 @@ import com.usst.transformer.service.IDimensionConverter;
 
 public class ActiveUserCollector implements IOutputCollector {
 
-	@Override
+    @Override
 	public void collect(Configuration conf, BaseDimension key, BaseStatsValueWritable value, PreparedStatement pstmt,
 			IDimensionConverter converter) throws SQLException, IOException {
         // 进行强制后获取对应的值

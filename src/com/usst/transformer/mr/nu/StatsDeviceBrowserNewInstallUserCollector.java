@@ -32,6 +32,8 @@ public class StatsDeviceBrowserNewInstallUserCollector implements IOutputCollect
         pstmt.setInt(++i, newInstallUsers.get());
         pstmt.setString(++i, conf.get(GlobalConstants.RUNNING_DATE_PARAMES));
         pstmt.setInt(++i, newInstallUsers.get());
+        
+        // 添加到batch中      将一组参数添加到此 PreparedStatement 对象的批处理命令中。
         pstmt.addBatch();
 		
 	}
