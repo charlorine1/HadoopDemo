@@ -32,7 +32,7 @@ public class ActiveUserCollector implements IOutputCollector {
         pstmt.setString(++i, conf.get(GlobalConstants.RUNNING_DATE_PARAMES));
         pstmt.setInt(++i, activeUserValue.get());
 
-        // 添加到batch中
+        // 添加到batch中  11111
         pstmt.addBatch();
 
 	}
