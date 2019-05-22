@@ -46,7 +46,7 @@ public class Operator_filter {
 
 			@Override
 			public Boolean call(String line) throws Exception {
-				return !line.contains("hello");
+				return line.contains("hello");
 			}
 			
 		});

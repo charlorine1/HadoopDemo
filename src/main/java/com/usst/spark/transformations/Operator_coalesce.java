@@ -16,6 +16,11 @@ import org.apache.spark.api.java.function.Function2;
  * 如果coalesce的分区数比原来的分区数还多，第二个参数设置false，即不产生shuffle,不会起作用。
  * 如果第二个参数设置成true则效果和repartition一样，即coalesce(numPartitions,true) = repartition(numPartitions)
  * 
+ * 
+ * 是调用了算子进行增加和减少分区，然后通过ture和false进行设置是否该增加分区和减少分区要不要进行shuffe
+ * 并不是调用了方法后来判断是否有shuffe的
+ * 
+ * 
  * @author root
  *
  */

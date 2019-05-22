@@ -12,6 +12,16 @@ import org.apache.spark.api.java.function.VoidFunction;
 
 import scala.Tuple2;
 
+
+
+
+
+/** 
+ *  方法描述： 不管是怎么样的RDD调用该算子，其实生成的都是一个tuple二元组
+ *            
+ *      JavaPairRDD<String, Iterable<Row>> sessionid2ActionsRDD 来调用也是生成一个tuple<String,String> 的二元组，并不是想有些算子只能有一部分的RDD来调用
+ * 
+ * **/
 public class Operator_mapToPair {
 
 	public static void main(String[] args) {

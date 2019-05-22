@@ -15,6 +15,7 @@ import org.apache.spark.api.java.function.Function2;
 import scala.Tuple2;
 /**
  * 自定义分区器
+ * 注意：该自定义分区器是通过对（key，value）格式的key进行分区，所以该partitionBy算子是作用在二元组上面的（tuple（key，value））
  * @author root
  *
  */
